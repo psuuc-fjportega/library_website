@@ -62,7 +62,8 @@ $register = function (): void {
 
     Auth::login($user);
 
-    $this->redirect(route($user->dashboardRouteName(), absolute: false), navigate: true);
+    // Use a full redirect so the layout (including navbar) is re-rendered correctly after registration.
+    $this->redirect(route($user->dashboardRouteName(), absolute: false));
 };
 
 ?>

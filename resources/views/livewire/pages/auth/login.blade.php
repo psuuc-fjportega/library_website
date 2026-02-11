@@ -36,7 +36,8 @@ $login = function () {
 
     $dashboardRoute = $user->dashboardRouteName();
 
-    $this->redirectIntended(default: route($dashboardRoute, absolute: false), navigate: true);
+    // Use a full redirect so the layout (including navbar) is re-rendered correctly after login.
+    $this->redirectIntended(default: route($dashboardRoute, absolute: false));
 };
 
 ?>

@@ -24,7 +24,7 @@ Route::get('librarian/dashboard', DashboardController::class)
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])
-    ->name('profile');
+    ->name('profile.show');
 
 Route::middleware(['auth'])->group(function (): void {
     Route::resource('categories', CategoryController::class);
