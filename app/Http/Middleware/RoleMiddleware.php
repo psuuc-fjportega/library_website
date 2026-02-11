@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
+
+class RoleMiddleware
+{
+    public function handle(Request $request, Closure $next, $role): Response
+    {
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
+
+        $allowed = explode(',', $role);
+        if (! in_array(Auth::user()->role, array_map('trim', $allowed), true)) {
+            abort(403);
+        }
+
+        return $next($request);
+    }
+}
